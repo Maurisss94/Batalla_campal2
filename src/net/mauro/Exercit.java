@@ -97,52 +97,44 @@ public class Exercit {
     
     public void MoureExercit(Camp pissarra){
     	
-    	
     	Random rn = new Random();
-    	while(!ExercitArriba()){
-    		
     	
-    	if(this.ubicacio == 1){
-    		for(int i=0;i<soldatsExercit.size();i++){
-        		int mou = rn.nextInt(soldatsExercit.size());
-        		soldatsExercit.get(mou).setVelocitat(10);
-        		soldatsExercit.get(mou).mouSoldat();
+    	while(!soldatsArriben()){
+    		if(this.ubicacio == 1){
     			
-        	}
-    	}else{
-    		for(int i=0;i<soldatsExercit.size();i++){
-        		int mou2 = rn.nextInt(soldatsExercit.size());
+    				int mou = rn.nextInt(soldatsExercit.size());
+    				soldatsExercit.get(mou).setVelocitat(10);
+    				if(!soldatsExercit.get(mou).SoldatArriba(pissarra)){
+            			soldatsExercit.get(mou).mouSoldat();
+            		}
+    				
+    			
+    		}else{
+    			int mou2 = rn.nextInt(soldatsExercit.size());
         		soldatsExercit.get(mou2).setVelocitat(-10);
         		soldatsExercit.get(mou2).mouSoldat();
-    			
-        	}
-    	}
-    	}
-    	
-    	
-    	
-    	
-    	
-    	
-    }
-    
-    public boolean ExercitArriba(){
+    		}
     		
+    		
+    	}
     	
-       int cont=0;
-       for(int i=0;i<soldatsExercit.size();i++){
-           if(soldatsExercit.get(i).haArribat){
-               cont++;
-           }
-       }
-
-       if(cont == soldatsExercit.size()){
-
-           return true;
-       }
-       return false;
+    	}
     
-    }
+    public boolean soldatsArriben(){
+      int cont=0;
+      for(int i=0;i<soldatsExercit.size();i++){
+          if(soldatsExercit.get(i).isHaArribat()){
+              cont++;
+          }
+      }
+
+      if(cont ==soldatsExercit.size()){
+
+         return true;
+     }
+      return false;
+ }
+    
     
     
     }
