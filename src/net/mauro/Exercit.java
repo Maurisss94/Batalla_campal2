@@ -99,24 +99,20 @@ public class Exercit {
     	
     	Random rn = new Random();
     	
-    	while(!soldatsArriben()){
-    		if(this.ubicacio == 1){
-    			
     				int mou = rn.nextInt(soldatsExercit.size());
-    				soldatsExercit.get(mou).setVelocitat(10);
-    				if(!soldatsExercit.get(mou).SoldatArriba(pissarra)){
-            			soldatsExercit.get(mou).mouSoldat();
-            		}
     				
-    			
-    		}else{
-    			int mou2 = rn.nextInt(soldatsExercit.size());
-        		soldatsExercit.get(mou2).setVelocitat(-10);
-        		soldatsExercit.get(mou2).mouSoldat();
-    		}
+    				if(!soldatsExercit.get(mou).SoldatArriba(pissarra, this.ubicacio)){
+            			soldatsExercit.get(mou).mouSoldat();
+            		}else if(this.soldatsArriben()){
+            			if(this.ubicacio == 1){
+            				this.setUbicacio(2);
+            			}else{
+            				this.setUbicacio(1);
+            			}
+            			this.formar(pissarra);
+            		}
     		
     		
-    	}
     	
     	}
     
@@ -134,6 +130,19 @@ public class Exercit {
      }
       return false;
  }
+    
+    public void aplicarVelocitat(){
+    	
+    	for(int i=0;i<soldatsExercit.size();i++){
+    		if(this.getUbicacio() == 1){
+    			soldatsExercit.get(i).setVelocitat(10);
+    		}else{
+    			soldatsExercit.get(i).setVelocitat(-10);
+    		}
+    	}
+    }
+    
+     
     
     
     

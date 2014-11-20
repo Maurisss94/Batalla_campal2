@@ -40,6 +40,14 @@ public class Camp {
         exercits.add(exercitaAfegir);
 
     }
+    public boolean shaAcabat(){
+    	
+    	if(exercits.size() == 0){
+    		return true;
+    	}else{
+    		return false;
+    	}
+    }
 
 
 

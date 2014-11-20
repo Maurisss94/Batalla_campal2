@@ -7,7 +7,7 @@ public class Soldat {
     GImage imatge ;
     int velocitat;
     boolean haArribat;
-    double desti;
+    
     
 
     Soldat(){
@@ -43,27 +43,34 @@ public class Soldat {
 		this.haArribat = haArribat;
 	}
 	
-	public double getDesti() {
-		return desti;
-	}
-	public void setDesti(double desti) {
-		this.desti = desti;
-	}
+	
 	public void mouSoldat(){
 		
 		this.getImatge().move(velocitat, 0);
 		this.getImatge().pause(10);
 		
 	}
-	public boolean SoldatArriba(Camp pissarra){
+	public boolean SoldatArriba(Camp pissarra, int ubicacio){
 		
-		if(this.getImatge().getX()> pissarra.getWIDTH()-this.getImatge().getWidth()){
-			this.haArribat = true;
-			return true;
+		
+		if(ubicacio == 1){
+			if(this.getImatge().getX()> pissarra.getWIDTH()-this.getImatge().getWidth()){
+				this.haArribat = true;
+				return true;
+			}else{
+				this.haArribat = false;
+				return false;
+			}
 		}else{
-			this.haArribat = false;
-			return false;
+			if(this.getImatge().getX() <= 0){
+				this.haArribat = true;
+				return true;
+			}else{
+				this.haArribat = false;
+				return false;
+			}
 		}
+		
 	}
 	
 	

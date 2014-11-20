@@ -62,10 +62,17 @@ public class Principal extends GraphicsProgram {
     public void moureExercits(){
     
     	
-    	for(int i=0;i<campBatalla.getExercits().size();i++){
-    		campBatalla.getExercits().get(i).MoureExercit(campBatalla);        
-            
+    	while(!campBatalla.shaAcabat()) {
+    		
+    		campBatalla.getExercits().get(0).aplicarVelocitat();
+    		campBatalla.getExercits().get(0).MoureExercit(campBatalla);   
+    		campBatalla.getExercits().get(1).aplicarVelocitat();
+    		campBatalla.getExercits().get(1).MoureExercit(campBatalla);
+    		
     	}
+    	
+    	
+    	
     }
 
 
@@ -87,12 +94,6 @@ public class Principal extends GraphicsProgram {
         moureExercits();
         
         
-        
-
-
-
-
-
 
 
 
