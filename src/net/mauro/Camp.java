@@ -42,7 +42,7 @@ public class Camp {
     }
     public boolean shaAcabat(){
     	
-    	if(exercits.size() == 0){
+    	if(exercits.get(0).soldatsExercit.size() == 0){
     		return true;
     	}else{
     		return false;

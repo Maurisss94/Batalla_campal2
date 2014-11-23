@@ -1,6 +1,7 @@
 package net.mauro;
 
 import acm.graphics.GImage;
+import acm.graphics.GRectangle;
 
 public class Soldat {
 
@@ -72,6 +73,20 @@ public class Soldat {
 		}
 		
 	}
+	public boolean Morts(Soldat soldatEnemic){
+
+        if(this.Rectangle().intersects(soldatEnemic.Rectangle())){
+            return true;
+        }else{
+            return false;
+        }
+
+
+    }
+    public GRectangle Rectangle(){
+        return getImatge().getBounds();
+
+    }
 	
 	
 	

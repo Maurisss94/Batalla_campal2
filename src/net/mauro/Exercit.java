@@ -93,6 +93,18 @@ public class Exercit {
 
 
         }
+    public void reubicarExercits(Camp pissarra){
+    	
+    	if(this.soldatsArriben()){
+			if(this.ubicacio == 1){
+				this.setUbicacio(2);
+			}else{
+				this.setUbicacio(1);
+			}
+			this.formar(pissarra);
+		}
+    	
+    }
     
     
     public void MoureExercit(Camp pissarra){
@@ -103,13 +115,11 @@ public class Exercit {
     				
     				if(!soldatsExercit.get(mou).SoldatArriba(pissarra, this.ubicacio)){
             			soldatsExercit.get(mou).mouSoldat();
-            		}else if(this.soldatsArriben()){
-            			if(this.ubicacio == 1){
-            				this.setUbicacio(2);
-            			}else{
-            				this.setUbicacio(1);
-            			}
-            			this.formar(pissarra);
+            			
+            			
+            		
+            		}else{
+            			this.reubicarExercits(pissarra);
             		}
     		
     		
@@ -132,7 +142,7 @@ public class Exercit {
  }
     
     public void aplicarVelocitat(){
-    	
+    
     	for(int i=0;i<soldatsExercit.size();i++){
     		if(this.getUbicacio() == 1){
     			soldatsExercit.get(i).setVelocitat(10);
@@ -141,6 +151,34 @@ public class Exercit {
     		}
     	}
     }
+    public void comprovarMorts(ArrayList<Soldat> atacats){
+    	
+    	for(int i=atacats.size()-1;i>=0;i--){
+    		
+    		for(int j=this.soldatsExercit.size()-1;j>=0;j--){
+    			
+    			if(atacats.get(i).Morts(soldatsExercit.get(j))){
+    				
+    				if(atacats.get(i).getImatge().getY() == this.soldatsExercit.get(j).getImatge().getY()){
+    					
+    					atacats.get(i).getImatge().getParent().remove(atacats.get(i).getImatge());
+    					atacats.remove(i);
+        				//System.out.println(atacats.size());
+    				}else{
+    					break;
+    				}
+    				
+    			}
+    			
+    		}
+    	}
+    		
+    	
+    	
+    	
+    }
+    
+   
     
      
     

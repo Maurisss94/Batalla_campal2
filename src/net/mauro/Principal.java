@@ -64,16 +64,32 @@ public class Principal extends GraphicsProgram {
     	
     	while(!campBatalla.shaAcabat()) {
     		
-    		campBatalla.getExercits().get(0).aplicarVelocitat();
-    		campBatalla.getExercits().get(0).MoureExercit(campBatalla);   
-    		campBatalla.getExercits().get(1).aplicarVelocitat();
-    		campBatalla.getExercits().get(1).MoureExercit(campBatalla);
+    		
+    		for(int i=0;i<campBatalla.getExercits().size();i++){
+    			campBatalla.getExercits().get(i).aplicarVelocitat();
+    			campBatalla.getExercits().get(i).MoureExercit(campBatalla);
+    			campBatalla.getExercits().get(i).comprovarMorts(campBatalla.getExercits().get(Oponent(i)).soldatsExercit);
+    			System.out.println("Exercit 0: "+campBatalla.getExercits().get(Oponent(0)).soldatsExercit.size()+ 
+    				" Exercit 1: "+campBatalla.getExercits().get(Oponent(1)).soldatsExercit.size());
+    			
+    		}
+
+    		
     		
     	}
     	
     	
     	
     }
+    public int Oponent(int exercitOponent){
+    	
+    	if(exercitOponent == 0){
+    		return 1;
+    	}else{
+    		return 0;
+    	}
+    }
+  
 
 
     public void run(){
@@ -92,6 +108,9 @@ public class Principal extends GraphicsProgram {
         pintarExercits(campBatalla.getExercits());
         formarExercits();
         moureExercits();
+        
+        
+        
         
         
 
