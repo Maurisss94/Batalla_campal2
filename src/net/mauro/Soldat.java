@@ -3,96 +3,166 @@ package net.mauro;
 import acm.graphics.GImage;
 import acm.graphics.GRectangle;
 
+/**
+ * Classe que definiex com ha de ser un soldat.
+ * @author mauro
+ *
+ */
 public class Soldat {
 
-    GImage imatge ;
-    int velocitat;
-    boolean haArribat;
-    
-    
 
-    Soldat(){
+  /**
+   * variable que guarda el numero de pausa.
+   */
+    private static final int PAUSA = 10;
+    /**
+     * Variable que emmagatzema la imatge del soldat.
+     */
+    private GImage imatge;
+    /**
+     * Variable que defineix la velocitat del soldat alhora de moure's.
+     */
+    private int velocitat;
+    /**
+     * Variable que ens indica si el soldat haArribat al seu desti.
+     */
+    private boolean haArribat;
+
+    /**
+     * Constructor per defecte.
+     */
+    Soldat() {
 
     }
-    public Soldat(GImage imatge){
-        this.imatge = imatge;
+    /**
+     * Constructor del soldat.
+     * @param imatgeSoldat imatge que rep el soldat.
+     */
+    public Soldat(final GImage imatgeSoldat) {
+        this.imatge = imatgeSoldat;
 
     }
-    public GImage getImatge() {
+    /**
+     * Getter de la imatge del soldat.
+     * @return la imatge del soldat.
+     */
+    public final  GImage getImatge() {
         return imatge;
     }
-    public void setImatge(GImage imatge) {
-        this.imatge = imatge;
+    /**
+     * Setter de la imatge del soldat.
+     * @param imatgeSoldat imatge del soldat en el sistema.
+     */
+    public final void setImatge(final GImage imatgeSoldat) {
+        this.imatge = imatgeSoldat;
     }
 
-    public void vesA(double x, double y){
-
-        imatge.setLocation(x, y);
+    /**
+     * Getter de la velocitat del soldat.
+     * @return velocitat soldat.
+     */
+    public final int getVelocitat() {
+    return velocitat;
     }
-    
-    public int getVelocitat() {
-		return velocitat;
-	}
-	public void setVelocitat(int velocitat) {
-		this.velocitat = velocitat;
-	}
-	
-	public boolean isHaArribat() {
-		return haArribat;
-	}
-	public void setHaArribat(boolean haArribat) {
-		this.haArribat = haArribat;
-	}
-	
-	
-	public void mouSoldat(){
-		
-		this.getImatge().move(velocitat, 0);
-		this.getImatge().pause(10);
-		
-	}
-	public boolean SoldatArriba(Camp pissarra, int ubicacio){
-		
-		
-		if(ubicacio == 1){
-			if(this.getImatge().getX()> pissarra.getWIDTH()-this.getImatge().getWidth()){
-				this.haArribat = true;
-				return true;
-			}else{
-				this.haArribat = false;
-				return false;
-			}
-		}else{
-			if(this.getImatge().getX() <= 0){
-				this.haArribat = true;
-				return true;
-			}else{
-				this.haArribat = false;
-				return false;
-			}
-		}
-		
-	}
-	public boolean Morts(Soldat soldatEnemic){
+    /**
+     * Setter de la velocitat del soldat.
+     * @param velocitatSoldat del soldat.
+     */
+    public final  void setVelocitat(final int velocitatSoldat) {
+    this.velocitat = velocitatSoldat;
+    }
 
-        if(this.Rectangle().intersects(soldatEnemic.Rectangle())){
-            return true;
-        }else{
-            return false;
-        }
+    /**
+     * Propietat del soldat per saber is ha arribat.
+     * @return true or false depen de si ha arribat al final del camp.
+     */
+    public final boolean isHaArribat() {
+    return haArribat;
+    }
+    /**
+     * Setter per indicar true or false a la propietat haArribat.
+     * @param haArribatSoldat propietat haarribat.
+     */
+    public final  void setHaArribat(final boolean haArribatSoldat) {
+    this.haArribat = haArribatSoldat;
+    }
+
+    /**
+     * Metode que ens indica on s'ha de localitzar el soldat.
+     * @param x Posicio x del soldat.
+     * @param y Posicio y del soldat.
+     */
+    public final void vesA(final double x, final double y) {
+
+      imatge.setLocation(x, y);
+    }
+
+
+    /**
+     * Metode que mou el soldat.
+     */
+  public final void mouSoldat() {
+
+
+    this.getImatge().move(velocitat, 0);
+    this.getImatge().pause(PAUSA);
+
+  }
+  /**
+   * Metode per saber si el soldat ha arribat al final del camp.
+   * @param pissarra camp de batalla.
+   * @param ubicacio ubicacio del exercit.
+   * @return retorna true o false depen si ha arribat el soldat.
+   */
+  public final boolean soldatArriba(final Camp pissarra, final int ubicacio) {
+
+    double posicioSoldat = this.getImatge().getX();
+    double ampladaSoldat = this.getImatge().getWidth();
+
+    if (ubicacio == 1) {
+      if (posicioSoldat > pissarra.getWIDTH() - ampladaSoldat) {
+        this.haArribat = true;
+        return true;
+      } else {
+        this.haArribat = false;
+        return false;
+      }
+    } else {
+      if (posicioSoldat <= 0) {
+        this.haArribat = true;
+        return true;
+      } else {
+        this.haArribat = false;
+        return false;
+      }
+    }
+
+  }
+  /**
+   * Metode que comprova si una imatge intersecciona amb un altre.
+   * @param soldatEnemic soldat de l'altre exercit.
+   * @return si ha tocat o no.
+   */
+    public final boolean morts(final Soldat soldatEnemic) {
+
+        return this.rectangle().intersects(soldatEnemic.rectangle());
 
 
     }
-    public GRectangle Rectangle(){
+    /**
+     * Metode que et retorna la caixa de la imatge.
+     * @return el rectangle de la imatge.
+     */
+    public final  GRectangle rectangle() {
         return getImatge().getBounds();
 
     }
-	
-	
-	
-		
-	}
-	
+
+
+
+
+  }
+
 
 
 
